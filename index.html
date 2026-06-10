@@ -25,7 +25,7 @@
             min-height: 100vh;
         }
 
-        /* ۱. باکس هیرو (بالاترین باکس توضیحات) */
+        /* ۱. باکس هیرو (بالاترین باکس) */
         .hero-intro-zone {
             width: 100%;
             padding: 3rem 2rem 1.5rem 2rem;
@@ -50,25 +50,26 @@
             margin-bottom: 1rem;
         }
 
-        /* ۲. ردیف جدید شامل باکس متن تاریخچه (چپ) و باکس تصاویر (راست) */
+        /* ۲. ردیف میانی: متن تاریخچه و باکس تصاویر بزرگ شده */
         .middle-content-row {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem 2rem 2rem;
             display: flex;
-            gap: 20px; /* فاصله بین دو باکس */
+            gap: 25px;
+            align-items: stretch;
         }
 
-        /* باکس تاریخچه نجوم (سمت چپ) */
+        /* باکس تاریخچه نجوم */
         .history-text-box {
-            flex: 0 0 55%; /* ۵۵ درصد کل عرض ردیف */
+            flex: 1; /* اجازه به متن برای استفاده از فضای باقی‌مانده */
             background: #f8fafc;
             border: 1px solid rgba(0,0,0,0.1);
             border-radius: 14px;
             padding: 1.8rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            direction: ltr; /* نمایش چپ‌به‌راست برای متن انگلیسی */
+            direction: ltr;
             text-align: left;
         }
         .history-text-box h2 {
@@ -95,42 +96,46 @@
             font-weight: 600;
         }
 
-        /* باکس گالری تصاویر (سمت راست) */
+        /* باکس تصاویر (فیت شده برای ۲ عکس بزرگ) */
         .image-gallery-box {
-            flex: 0 0 45%; /* ۴۵ درصد کل عرض ردیف */
+            flex: 0 0 auto; /* ابعاد بر اساس محتوا تنظیم می‌شود */
             background: #f8fafc;
             border: 1px solid rgba(0,0,0,0.1);
             border-radius: 14px;
-            padding: 1.8rem;
+            padding: 1.5rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .image-gallery-box h3 {
             font-size: 1.1rem;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             color: #1e293b;
             border-right: 4px solid #ef4444;
             padding-right: 12px;
             text-align: right;
         }
+        /* گرید فیت شده برای ۲ عکس با ابعاد ۲ برابر (تقریباً ۳۰۰ پیکسل هر عکس) */
         .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 16px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
         }
         .grid-container img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
+            width: 300px; /* سایز ۲ برابر شده */
+            height: 300px; /* سایز ۲ برابر شده */
             object-fit: contain;
-            background-color: rgba(0, 0, 0, 0.02);
-            border-radius: 8px;
-            border: 1px solid rgba(0,0,0,0.06);
+            background-color: #ffffff;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.08);
             transition: transform 0.3s ease;
         }
         .grid-container img:hover {
-            transform: scale(1.04);
+            transform: scale(1.03);
         }
 
-        /* ۳. بخش اصلی پایین (مدل‌های سه بعدی و متن سایدبار) */
+        /* ۳. بخش مدل‌های سه بعدی پایین */
         .main-content-zone {
             display: flex;
             width: 100vw;
@@ -206,14 +211,12 @@
         p { font-size: 1rem; line-height: 1.7; text-align: justify; }
         .highlight { color: #ef4444; font-weight: bold; }
 
-        /* ریسپانسیو مانیتورهای کوچک و موبایل */
         @media (max-width: 1023px) {
-            .hero-box h1 { font-size: 1.3rem; }
             .middle-content-row { flex-direction: column; }
-            .history-text-box, .image-gallery-box { flex: 0 0 100%; width: 100%; }
+            .grid-container { flex-direction: column; align-items: center; }
+            .grid-container img { width: 90%; height: auto; }
             .main-content-zone { flex-direction: column; height: auto; }
             .canvas-zone { height: 45vh; position: sticky; top: 0; z-index: 5; background: white; border-bottom: 1px solid #ddd; }
-            .sidebar-text-zone { width: 100vw; height: auto; padding: 1.5rem 1rem; }
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -244,8 +247,8 @@
             <div class="image-gallery-box">
                 <h3>Early Cosmological Models</h3>
                 <div class="grid-container">
-                    <img src="images/pic1.jpg" alt="Model Reference 1">
-                    <img src="images/pic2.jpg" alt="Model Reference 2">
+                    <img src="images/pic1.jpg" alt="Ptolemaic Model">
+                    <img src="images/pic2.jpg" alt="Copernican Model">
                 </div>
             </div>
 
