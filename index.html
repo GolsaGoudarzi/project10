@@ -12,22 +12,22 @@
             box-sizing: border-box;
         }
 
-        /* طراحی پس‌زمینه با تم ستاره‌ها، سیارات و خطوط پوستر ارسالی */
+        /* طراحی پس‌زمینه شلوغ کیهانی با پترن خطوط هندسی و لایه‌های متعدد دودل */
         body {
-            background-color: #f7f9fc;
+            background-color: #f6f8fc;
             color: #1e293b;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             position: relative;
-            /* پس‌زمینه گرادیان ملایم پاستلی همراه با پترن خطوط مشبک و نقاط کیهانی */
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(167, 139, 250, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(125, 211, 252, 0.06) 0%, transparent 40%),
-                radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 0);
-            background-size: 100% 100%, 100% 100%, 30px 30px;
+                radial-gradient(circle at 15% 15%, rgba(167, 139, 250, 0.08) 0%, transparent 35%),
+                radial-gradient(circle at 85% 30%, rgba(125, 211, 252, 0.09) 0%, transparent 40%),
+                radial-gradient(circle at 50% 70%, rgba(254, 215, 170, 0.07) 0%, transparent 45%),
+                radial-gradient(rgba(0, 0, 0, 0.02) 1.2px, transparent 0);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 25px 25px;
         }
 
-        /* ایجاد دودل‌های دست‌نویس و بامزه سیارات و ستاره‌ها در پس‌زمینه بدون مزاحمت برای متون */
+        /* لایه اول دودل‌های پس‌زمینه - سیارات بزرگ و ستاره‌ها */
         body::before {
             content: "";
             position: absolute;
@@ -37,22 +37,48 @@
             left: 0;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.6;
-            /* شبیه‌سازی اشکال گرافیکی خطی مانند مدارها، زحل، ستاره‌های چهارپر و صورت‌های فلکی روی پوستر */
+            opacity: 0.75;
             background-image: 
-                /* زحل و مدار در سمت چپ بالا */
-                radial-gradient(ellipse at 5% 5%, transparent 40px, rgba(167, 139, 250, 0.15) 42px, transparent 44px),
-                radial-gradient(circle at 5% 5%, rgba(125, 211, 252, 0.2) 20px, transparent 21px),
-                /* ستاره‌های کوچک درخشان پین شده در نقاط مختلف */
-                radial-gradient(circle at 15% 15%, #ef4444 2px, transparent 3px),
-                radial-gradient(circle at 85% 12%, #a78bfa 3px, transparent 4px),
-                radial-gradient(circle at 92% 45%, #ef4444 2px, transparent 3px),
-                radial-gradient(circle at 8% 65%, #7dd3fc 3px, transparent 5px),
-                /* مدار سیاره‌ای در سمت راست پایین */
-                radial-gradient(ellipse at 95% 85%, transparent 80px, rgba(167, 139, 250, 0.12) 82px, transparent 85px),
-                /* خطوط تزئینی خط‌چین هندسه فضازمان */
-                linear-gradient(to right, transparent 50%, rgba(0,0,0,0.03) 50%) ;
-            background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 1px;
+                /* زحل حلقه‌دار در چپ بالا */
+                radial-gradient(ellipse at 7% 8%, transparent 45px, rgba(167, 139, 250, 0.2) 47px, transparent 50px),
+                radial-gradient(circle at 7% 8%, rgba(125, 211, 252, 0.25) 22px, transparent 24px),
+                /* سیاره کوچک با مدار در راست میانه */
+                radial-gradient(ellipse at 93% 35%, transparent 30px, rgba(239, 68, 68, 0.15) 32px, transparent 35px),
+                radial-gradient(circle at 93% 35%, rgba(167, 139, 250, 0.2) 14px, transparent 16px),
+                /* کهکشان مارپیچی در چپ پایین */
+                radial-gradient(ellipse at 4% 75%, transparent 20px, rgba(125, 211, 252, 0.15) 25px, transparent 50px),
+                /* ستاره‌های چهارپر (دکوراتیو پاششی در کل صفحه) */
+                radial-gradient(circle at 25% 5%, #a78bfa 3px, transparent 4px),
+                radial-gradient(circle at 45% 12%, #f43f5e 2px, transparent 3px),
+                radial-gradient(circle at 78% 8%, #38bdf8 3px, transparent 4px),
+                radial-gradient(circle at 12% 28%, #fbbf24 2.5px, transparent 3.5px),
+                radial-gradient(circle at 88% 55%, #a78bfa 3px, transparent 4px),
+                radial-gradient(circle at 35% 85%, #f43f5e 2px, transparent 3px),
+                radial-gradient(circle at 95% 92%, #38bdf8 3.5px, transparent 4.5px),
+                radial-gradient(circle at 50% 40%, #fbbf24 2px, transparent 3px);
+            background-size: 100% 100%;
+        }
+
+        /* لایه دوم دودل‌های پس‌زمینه - جزییات ستاره‌ای ریزتر برای شلوغ کردن فضا */
+        body::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.65;
+            background-image: 
+                radial-gradient(circle at 18% 45%, rgba(167, 139, 250, 0.4) 1px, transparent 2px),
+                radial-gradient(circle at 22% 65%, rgba(56, 189, 248, 0.5) 1.5px, transparent 2.5px),
+                radial-gradient(circle at 75% 72%, rgba(244, 63, 94, 0.4) 1px, transparent 2px),
+                radial-gradient(circle at 82% 22%, rgba(251, 191, 36, 0.5) 1px, transparent 2px),
+                radial-gradient(circle at 30% 95%, rgba(167, 139, 250, 0.4) 1.5px, transparent 2.5px),
+                /* مدارهای فرضی تزئینی دایره‌ای کم‌رنگ */
+                radial-gradient(circle at 50% 15%, transparent 120px, rgba(0,0,0,0.015) 121px, transparent 123px);
+            background-size: 100% 100%;
         }
 
         .app-container {
@@ -70,19 +96,20 @@
             padding: 3rem 2rem 1.5rem 2rem;
             display: flex;
             justify-content: center;
+            position: relative;
         }
         .hero-box {
             width: 100%;
             max-width: 1200px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px dashed #a78bfa; /* تبدیل به خط‌چین ملایم بر اساس تم پوستر */
+            background: rgba(255, 255, 255, 0.92);
+            border: 2px dashed #a78bfa;
             border-radius: 24px;
             padding: 2.5rem 2rem;
             text-align: center;
             box-shadow: 0 10px 25px rgba(167, 139, 250, 0.08);
             position: relative;
+            z-index: 2;
         }
-        /* آیکون دکوراتیو سیاره کوچک بالای باکس هیرو */
         .hero-box::after {
             content: "🪐";
             position: absolute;
@@ -102,6 +129,60 @@
             font-size: 0.95rem;
         }
 
+        /* تزریق فلش‌های دودل فانتزی از باکس بالا به باکس‌های پایینی در حالت دسکتاپ */
+        @media (min-width: 1024px) {
+            /* فلش به سمت باکس تاریخچه (سمت چپ) */
+            .hero-intro-zone::before {
+                content: "";
+                position: absolute;
+                bottom: -25px;
+                left: calc(50% - 280px);
+                width: 120px;
+                height: 50px;
+                border-left: 3px dashed #a78bfa;
+                border-bottom: 3px dashed #a78bfa;
+                border-bottom-left-radius: 30px;
+                transform: skewX(-15deg);
+                pointer-events: none;
+            }
+            /* نوک فلش سمت چپ */
+            .hero-intro-zone::after {
+                content: "▼";
+                position: absolute;
+                bottom: -32px;
+                left: calc(50% - 291px);
+                color: #a78bfa;
+                font-size: 0.8rem;
+                pointer-events: none;
+            }
+            
+            /* فلش به سمت گالری تصاویر اول (سمت راست) */
+            .middle-content-row::before {
+                content: "";
+                position: absolute;
+                top: -25px;
+                right: calc(50% - 280px);
+                width: 120px;
+                height: 45px;
+                border-right: 3px dashed #38bdf8;
+                border-top: 3px dashed #38bdf8;
+                border-top-right-radius: 30px;
+                transform: skewX(15deg);
+                pointer-events: none;
+            }
+            /* نوک فلش سمت راست */
+            .middle-content-row::after {
+                content: "▼";
+                position: absolute;
+                top: 15px;
+                right: calc(50% - 286px);
+                color: #38bdf8;
+                font-size: 0.8rem;
+                pointer-events: none;
+                transform: rotate(-15deg);
+            }
+        }
+
         /* ۲. ردیف میانی اول: متن تاریخچه و باکس ۲ تصویر */
         .middle-content-row {
             width: 100%;
@@ -111,12 +192,12 @@
             display: flex;
             gap: 25px;
             align-items: stretch;
+            position: relative;
         }
 
-        /* طراحی کارت‌های اصلی برگرفته از پس‌زمینه بنفش/آبی بسیار ملایم بخش‌های پوستر */
         .history-text-box {
             flex: 1;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(167, 139, 250, 0.15);
             border-radius: 20px;
             padding: 2rem;
@@ -150,7 +231,7 @@
 
         .image-gallery-box {
             flex: 0 0 auto;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(167, 139, 250, 0.15);
             border-radius: 20px;
             padding: 1.8rem;
@@ -202,7 +283,7 @@
             align-items: stretch;
         }
 
-        /* ستون سمت چپ: (شامل باکس افقی Part II، شبیه‌ساز، Part III و REFERENCES) */
+        /* ستون سمت چپ */
         .left-visual-column {
             flex: 0 0 75%;
             display: flex;
@@ -210,10 +291,9 @@
             gap: 20px;
         }
 
-        /* باکس اطلاعاتی Part II */
         .infobox {
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(167, 139, 250, 0.15);
             padding: 2.2rem;
             border-radius: 20px;
@@ -222,7 +302,6 @@
             text-align: left;
             position: relative;
         }
-        /* افزودن استاره‌های کارتونی تزئینی گوشه باکس */
         .infobox::before {
             content: "✨";
             position: absolute;
@@ -260,10 +339,9 @@
             font-weight: 600;
         }
 
-        /* باکس تک عکسی بدون عنوان (pic8) */
         .single-photo-box {
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(167, 139, 250, 0.15);
             border-radius: 20px;
             padding: 1.5rem;
@@ -280,7 +358,6 @@
             border-radius: 12px;
         }
 
-        /* کانتینر رندر شبیه‌ساز سه بعدی */
         .main-content-zone {
             width: 100%;
             height: 60vh;
@@ -298,10 +375,9 @@
         }
         #canvas-inner { width: 100%; height: 100%; }
 
-        /* باکس اطلاعاتی Part III */
         .metrics-cosmology-box {
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(167, 139, 250, 0.15);
             border-radius: 20px;
             padding: 2.2rem;
@@ -333,10 +409,9 @@
             font-weight: 600;
         }
 
-        /* باکس افقی رفرنس‌ها */
         .references-box {
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(167, 139, 250, 0.1);
             border-radius: 20px;
             padding: 2rem;
@@ -371,7 +446,7 @@
             word-break: break-all;
         }
 
-        /* ستون سمت راست: سایدبار حاوی باکس تصاویر اقلیدسی و باکس Part IV */
+        /* ستون سمت راست: سایدبار متنی */
         .sidebar-text-zone {
             flex: 0 0 25%; 
             display: flex;
@@ -379,13 +454,14 @@
             gap: 20px;
             direction: ltr;
             text-align: left;
+            position: relative;
         }
 
-        /* باکس تصاویر اقلیدسی عمودی عریض همراه با اسکرول داخلی */
+        /* باکس تصاویر اقلیدسی عمودی */
         .euclidean-foundations-box {
             width: 100%;
             max-height: 520px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(167, 139, 250, 0.15);
             border-radius: 20px;
             padding: 1.5rem;
@@ -394,6 +470,7 @@
             flex-direction: column;
             align-items: center;
             overflow-y: auto;
+            position: relative;
         }
         .euclidean-foundations-box::-webkit-scrollbar {
             width: 5px;
@@ -417,6 +494,33 @@
             z-index: 2;
             padding-bottom: 5px;
         }
+        
+        /* ایجاد فلش دودل فانتزی در سمت چپ گالری اقلیدسی دسکتاپ به همراه نوشته درون آن */
+        @media (min-width: 1024px) {
+            .sidebar-text-zone::before {
+                content: "scroll for more ➔";
+                position: absolute;
+                left: -125px;
+                top: 80px;
+                background: #fef08a;
+                color: #713f12;
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 0.78rem;
+                font-weight: bold;
+                padding: 5px 10px;
+                border-radius: 12px;
+                border: 2px dashed #ca8a04;
+                transform: rotate(-90deg);
+                box-shadow: 3px 3px 0px rgba(202, 138, 4, 0.2);
+                animation: floatDoodle 2s ease-in-out infinite;
+                z-index: 10;
+            }
+        }
+        @keyframes floatDoodle {
+            0%, 100% { transform: rotate(-90deg) translateX(0); }
+            50% { transform: rotate(-90deg) translateX(-6px); }
+        }
+
         .foundations-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -436,9 +540,8 @@
             transform: scale(1.02);
         }
 
-        /* باکس اطلاعاتی Part IV */
         .transition-spacetime-box {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(167, 139, 250, 0.15);
             padding: 2rem;
             border-radius: 20px;
@@ -501,7 +604,6 @@
             color: #475569;
         }
 
-        /* باکس‌های فرمول فیزیک با دیزاین پاستلی شیک مشابه فیلدهای وسط پوستر */
         .math-display {
             display: block;
             font-family: "Times New Roman", Times, serif;
@@ -530,7 +632,6 @@
             margin-top: 5px;
         }
 
-        /* المان‌های پاپ‌آپ داخل محیط سه بعدی */
         #model-title {
             position: absolute;
             top: 4%;
@@ -566,14 +667,30 @@
         }
 
         /* ==========================================================================
-           کدهای اختصاصی رسپانسیو و بهینه‌سازی کامل نسخه موبایل (تضمین خوانایی و تمیزی)
+           کدهای اختصاصی بهینه‌سازی کامل نسخه موبایل (تضمین خوانایی بدون بیرون زدگی)
            ========================================================================== */
         @media (max-width: 1023px) {
             body {
-                background-size: 100% 100%, 100% 100%, 20px 20px;
+                background-size: 100% 100%, 100% 100%, 100% 100%, 20px 20px;
             }
-            body::before {
-                display: none; /* حذف دودل‌های بزرگ پس‌زمینه در موبایل جهت خلوت ماندن فضا */
+            body::before, body::after {
+                opacity: 0.35; /* شفاف‌تر کردن دودل‌ها در موبایل جهت خوانایی بهتر متون علمی */
+            }
+            /* نمایش نوشته اسکرول اقلیدسی به صورت افقی بالای باکس آن در موبایل */
+            .sidebar-text-zone::before {
+                content: "scroll for more ➔";
+                display: block;
+                text-align: center;
+                background: #fef08a;
+                color: #713f12;
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 0.8rem;
+                font-weight: bold;
+                padding: 6px;
+                border-radius: 10px;
+                border: 2px dashed #ca8a04;
+                margin-bottom: -5px;
+                width: 100%;
             }
             .hero-intro-zone {
                 padding: 1.5rem 1rem 1rem 1rem;
@@ -619,7 +736,6 @@
                 padding: 1.5rem 1.2rem;
                 border-radius: 16px;
             }
-            /* تبدیل گرید دو ستونه متون نیوتنی به حالت تک ستونه منظم در موبایل */
             .newtonian-grid-layout {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -632,7 +748,6 @@
                 padding: 1.5rem 1.2rem;
                 border-radius: 16px;
             }
-            /* بهینه‌سازی فرمول‌های بزرگ ریاضی کاتژ در اسکرین موبایل برای جلوگیری از بیرون‌زدگی */
             .math-display {
                 font-size: 0.95rem;
                 overflow-x: auto;
@@ -643,7 +758,6 @@
                 flex: 0 0 100%;
                 gap: 15px;
             }
-            /* غیرفعال کردن اسکرول داخلی باکس تصاویر اقلیدسی در موبایل و تبدیل چیدمان به گالری دو ستونه موازی منظم */
             .euclidean-foundations-box {
                 max-height: none;
                 overflow-y: visible;
@@ -892,7 +1006,6 @@
             labelsContainer.appendChild(div); return div;
         }
 
-        // مدل تخت
         flatGroup.rotation.x = Math.PI / 6;
         const flatMesh = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 2.4), purpleMeshMat);
         flatMesh.rotation.x = -Math.PI / 2; flatMesh.userData = { title: 'Euclidean Space', parentGroup: flatGroup };
@@ -903,7 +1016,6 @@
         trackedPoints.push({o:flatGroup, lp:fp[0], el:createAngleLabel('50.2°')}, {o:flatGroup, lp:fp[1], el:createAngleLabel('66.4°')}, {o:flatGroup, lp:fp[2], el:createAngleLabel('63.4°')});
         modelGroups.push({g:flatGroup, isExpanded: false});
 
-        // مدل کروی
         const radius = 1.1;
         const sphMesh = new THREE.Mesh(new THREE.SphereGeometry(radius, 32, 32), purpleMeshMat);
         sphMesh.userData = { title: 'Spherical Space', parentGroup: sphGroup };
@@ -919,7 +1031,6 @@
         trackedPoints.push({o:sphGroup, lp:new THREE.Vector3(-radius,0,0), el:createAngleLabel('90.0°')}, {o:sphGroup, lp:new THREE.Vector3(0,0,-radius), el:createAngleLabel('90.0°')}, {o:sphGroup, lp:new THREE.Vector3(0,radius,0), el:createAngleLabel('90.0°')});
         modelGroups.push({g:sphGroup, isExpanded: false});
 
-        // مدل هذلولی
         const saddleGeo = new THREE.BufferGeometry(); const v=[], seg=24, sz=2.2;
         for(let i=0;i<=seg;i++) for(let j=0;j<=seg;j++){ let x=(i/seg-0.5)*sz, z=(j/seg-0.5)*sz; v.push(x,(x*x-z*z)*0.45,z); }
         const idx=[]; for(let i=0;i<seg;i++) for(let j=0;j<seg;j++){ let a=i*(seg+1)+j, b=a+1, c=(i+1)*(seg+1)+j, d=c+1; idx.push(a,b,c,b,d,c); }
