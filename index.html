@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,11 +11,48 @@
             padding: 0;
             box-sizing: border-box;
         }
+
+        /* طراحی پس‌زمینه با تم ستاره‌ها، سیارات و خطوط پوستر ارسالی */
         body {
-            background-color: #ffffff;
-            color: #000000;
+            background-color: #f7f9fc;
+            color: #1e293b;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
+            position: relative;
+            /* پس‌زمینه گرادیان ملایم پاستلی همراه با پترن خطوط مشبک و نقاط کیهانی */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(167, 139, 250, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(125, 211, 252, 0.06) 0%, transparent 40%),
+                radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 0);
+            background-size: 100% 100%, 100% 100%, 30px 30px;
+        }
+
+        /* ایجاد دودل‌های دست‌نویس و بامزه سیارات و ستاره‌ها در پس‌زمینه بدون مزاحمت برای متون */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+            /* شبیه‌سازی اشکال گرافیکی خطی مانند مدارها، زحل، ستاره‌های چهارپر و صورت‌های فلکی روی پوستر */
+            background-image: 
+                /* زحل و مدار در سمت چپ بالا */
+                radial-gradient(ellipse at 5% 5%, transparent 40px, rgba(167, 139, 250, 0.15) 42px, transparent 44px),
+                radial-gradient(circle at 5% 5%, rgba(125, 211, 252, 0.2) 20px, transparent 21px),
+                /* ستاره‌های کوچک درخشان پین شده در نقاط مختلف */
+                radial-gradient(circle at 15% 15%, #ef4444 2px, transparent 3px),
+                radial-gradient(circle at 85% 12%, #a78bfa 3px, transparent 4px),
+                radial-gradient(circle at 92% 45%, #ef4444 2px, transparent 3px),
+                radial-gradient(circle at 8% 65%, #7dd3fc 3px, transparent 5px),
+                /* مدار سیاره‌ای در سمت راست پایین */
+                radial-gradient(ellipse at 95% 85%, transparent 80px, rgba(167, 139, 250, 0.12) 82px, transparent 85px),
+                /* خطوط تزئینی خط‌چین هندسه فضازمان */
+                linear-gradient(to right, transparent 50%, rgba(0,0,0,0.03) 50%) ;
+            background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 1px;
         }
 
         .app-container {
@@ -23,6 +60,8 @@
             flex-direction: column;
             width: 100vw;
             min-height: 100vh;
+            position: relative;
+            z-index: 1;
         }
 
         /* ۱. باکس هیرو (بالاترین باکس) */
@@ -31,23 +70,36 @@
             padding: 3rem 2rem 1.5rem 2rem;
             display: flex;
             justify-content: center;
-            background: #ffffff;
         }
         .hero-box {
             width: 100%;
             max-width: 1200px;
-            background: #f8fafc;
-            border: 2px solid #ef4444;
-            border-radius: 16px;
-            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px dashed #a78bfa; /* تبدیل به خط‌چین ملایم بر اساس تم پوستر */
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 25px rgba(167, 139, 250, 0.08);
+            position: relative;
+        }
+        /* آیکون دکوراتیو سیاره کوچک بالای باکس هیرو */
+        .hero-box::after {
+            content: "🪐";
+            position: absolute;
+            top: -18px;
+            right: 40px;
+            font-size: 1.8rem;
         }
         .hero-box h1 {
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            color: #1e293b;
-            margin-bottom: 1rem;
+            color: #0f172a;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+        .hero-box p {
+            color: #64748b;
+            font-size: 0.95rem;
         }
 
         /* ۲. ردیف میانی اول: متن تاریخچه و باکس ۲ تصویر */
@@ -61,29 +113,30 @@
             align-items: stretch;
         }
 
+        /* طراحی کارت‌های اصلی برگرفته از پس‌زمینه بنفش/آبی بسیار ملایم بخش‌های پوستر */
         .history-text-box {
             flex: 1;
-            background: #f8fafc;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 14px;
-            padding: 1.8rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
             direction: ltr;
             text-align: left;
         }
         .history-text-box h2 {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: #1e293b;
+            color: #0f172a;
             margin-bottom: 1.2rem;
-            border-left: 4px solid #ef4444;
+            border-left: 4px solid #a78bfa;
             padding-left: 12px;
         }
         .history-list {
             list-style-type: none;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.1rem;
         }
         .history-list li {
             font-size: 0.98rem;
@@ -91,26 +144,26 @@
             color: #334155;
         }
         .history-list strong {
-            color: #ef4444;
+            color: #6366f1;
             font-weight: 600;
         }
 
         .image-gallery-box {
             flex: 0 0 auto;
-            background: #f8fafc;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 14px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            border-radius: 20px;
+            padding: 1.8rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
         .image-gallery-box h3 {
             font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: #1e293b;
-            border-right: 4px solid #ef4444;
+            margin-bottom: 1.2rem;
+            color: #0f172a;
+            border-right: 4px solid #a78bfa;
             padding-right: 12px;
             text-align: right;
         }
@@ -130,19 +183,12 @@
             height: 300px;
             object-fit: contain;
             background-color: #ffffff;
-            border-radius: 10px;
-            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 14px;
+            border: 1px solid rgba(0,0,0,0.05);
             transition: transform 0.3s ease;
         }
         .grid-images img:hover {
             transform: scale(1.03);
-        }
-        .caption-number {
-            font-size: 0.85rem;
-            color: #64748b;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-            margin-top: 5px;
         }
 
         /* کانتینر اصلی بخش پایینی */
@@ -167,26 +213,36 @@
         /* باکس اطلاعاتی Part II */
         .infobox {
             width: 100%;
-            background: #f8fafc;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            padding: 2.2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
             direction: ltr;
             text-align: left;
+            position: relative;
+        }
+        /* افزودن استاره‌های کارتونی تزئینی گوشه باکس */
+        .infobox::before {
+            content: "✨";
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 1.2rem;
+            opacity: 0.5;
         }
         .infobox h2 {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             margin-bottom: 1.5rem;
-            color: #1e293b;
-            border-left: 4px solid #ef4444;
+            color: #0f172a;
+            border-left: 4px solid #7dd3fc;
             padding-left: 12px;
             font-weight: 700;
         }
         .newtonian-grid-layout {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
+            gap: 30px;
         }
         .newtonian-list {
             list-style-type: none;
@@ -200,18 +256,18 @@
             color: #334155;
         }
         .newtonian-list strong {
-            color: #ef4444;
+            color: #6366f1;
             font-weight: 600;
         }
 
         /* باکس تک عکسی بدون عنوان (pic8) */
         .single-photo-box {
             width: 100%;
-            background: #f8fafc;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            border-radius: 20px;
             padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -221,8 +277,7 @@
             height: auto;
             max-height: 380px;
             object-fit: contain;
-            border-radius: 8px;
-            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 12px;
         }
 
         /* کانتینر رندر شبیه‌ساز سه بعدی */
@@ -230,11 +285,11 @@
             width: 100%;
             height: 60vh;
             background: #ffffff;
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: 14px;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            border-radius: 20px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.05);
         }
         .canvas-zone {
             width: 100%;
@@ -243,23 +298,23 @@
         }
         #canvas-inner { width: 100%; height: 100%; }
 
-        /* باکس اطلاعاتی Part III (متریک‌ها و کیهان‌شناسی) */
+        /* باکس اطلاعاتی Part III */
         .metrics-cosmology-box {
             width: 100%;
-            background: #f8fafc;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 14px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            border-radius: 20px;
+            padding: 2.2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
             direction: ltr;
             text-align: left;
         }
         .metrics-cosmology-box h2 {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #1e293b;
+            color: #0f172a;
             margin-bottom: 1.5rem;
-            border-left: 4px solid #ef4444;
+            border-left: 4px solid #a78bfa;
             padding-left: 12px;
         }
         .metrics-list {
@@ -274,27 +329,27 @@
             color: #334155;
         }
         .metrics-list strong {
-            color: #ef4444;
+            color: #6366f1;
             font-weight: 600;
         }
 
         /* باکس افقی رفرنس‌ها */
         .references-box {
             width: 100%;
-            background: #f8fafc;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(167, 139, 250, 0.1);
+            border-radius: 20px;
             padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
             direction: ltr;
             text-align: left;
         }
         .references-box h2 {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            color: #1e293b;
+            color: #0f172a;
             margin-bottom: 1.2rem;
-            border-left: 4px solid #ef4444;
+            border-left: 4px solid #64748b;
             padding-left: 12px;
         }
         .references-list {
@@ -311,12 +366,9 @@
             text-indent: -1rem;
         }
         .references-list a {
-            color: #ef4444;
+            color: #6366f1;
             text-decoration: none;
             word-break: break-all;
-        }
-        .references-list a:hover {
-            text-decoration: underline;
         }
 
         /* ستون سمت راست: سایدبار حاوی باکس تصاویر اقلیدسی و باکس Part IV */
@@ -329,56 +381,55 @@
             text-align: left;
         }
 
-        /* اصلاح و بزرگتر شدن باکس تصاویر اقلیدسی (تک ستونه عمودی عریض همراه با اسکرول داخلی) */
+        /* باکس تصاویر اقلیدسی عمودی عریض همراه با اسکرول داخلی */
         .euclidean-foundations-box {
             width: 100%;
-            max-height: 520px; /* اعمال محدودیت ارتفاع جهت متقارن ماندن و ایجاد اسکرول */
-            background: #f8fafc;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 14px;
+            max-height: 520px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            border-radius: 20px;
             padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-y: auto; /* فعالسازی اسکرول عمودی هوشمند */
+            overflow-y: auto;
         }
-        /* شخصی‌سازی نوار اسکرول باکس تصاویر اقلیدسی */
         .euclidean-foundations-box::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         .euclidean-foundations-box::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 0, 0, 0.15);
+            background-color: rgba(167, 139, 250, 0.3);
             border-radius: 10px;
         }
         .euclidean-foundations-box h3 {
             width: 100%;
             font-size: 1.15rem;
             font-weight: 700;
-            color: #1e293b;
+            color: #0f172a;
             margin-bottom: 1.2rem;
-            border-left: 4px solid #ef4444;
+            border-left: 4px solid #a78bfa;
             padding-left: 10px;
             text-align: left;
-            position: sticky; /* چسبیدن عنوان در هنگام اسکرول به پایین */
+            position: sticky;
             top: 0;
-            background: #f8fafc;
+            background: #ffffff;
             z-index: 2;
             padding-bottom: 5px;
         }
         .foundations-grid {
             display: grid;
-            grid-template-columns: 1fr; /* تبدیل به حالت تک ستونه عریض جهت ماکسیمم شدن ابعاد تصاویر */
+            grid-template-columns: 1fr;
             gap: 16px;
             width: 100%;
         }
         .foundations-grid img {
             width: 100%;
-            aspect-ratio: 1.2 / 1; /* اصلاح جزئی نسبت ابعاد برای عریض‌تر دیده شدن فرم عکس‌ها */
+            aspect-ratio: 1.2 / 1;
             object-fit: contain;
             background-color: #ffffff;
-            border-radius: 8px;
-            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.04);
             transition: transform 0.3s ease;
         }
         .foundations-grid img:hover {
@@ -387,29 +438,37 @@
 
         /* باکس اطلاعاتی Part IV */
         .transition-spacetime-box {
-            background: #f8fafc;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 1.8rem;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            position: relative;
+        }
+        .transition-spacetime-box::after {
+            content: "⭐";
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.1rem;
+            opacity: 0.4;
         }
         .transition-spacetime-box h2 {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin-bottom: 1.4rem;
-            color: #1e293b;
-            border-left: 4px solid #ef4444;
+            color: #0f172a;
+            border-left: 4px solid #7dd3fc;
             padding-left: 10px;
             font-weight: 700;
         }
 
-        /* فریم تصویر جاسازی شده در بالای متن باکس Part IV */
         .embedded-box-image {
             width: 100%;
             max-height: 240px;
             object-fit: contain;
             background-color: #ffffff;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
             margin-bottom: 1.5rem;
         }
 
@@ -425,7 +484,7 @@
             color: #334155;
         }
         .transition-list strong {
-            color: #ef4444;
+            color: #6366f1;
             font-weight: 600;
         }
         
@@ -442,24 +501,33 @@
             color: #475569;
         }
 
+        /* باکس‌های فرمول فیزیک با دیزاین پاستلی شیک مشابه فیلدهای وسط پوستر */
         .math-display {
             display: block;
             font-family: "Times New Roman", Times, serif;
             font-style: italic;
-            font-size: 1.15rem;
-            background: #ffffff;
-            padding: 0.6rem;
-            margin: 0.5rem 0;
-            border-radius: 6px;
-            border-left: 2px solid #cbd5e1;
+            font-size: 1.2rem;
+            background: #f8fafc;
+            border: 1px dashed rgba(167, 139, 250, 0.4);
+            padding: 0.8rem;
+            margin: 0.6rem 0;
+            border-radius: 10px;
             text-align: center;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
             direction: ltr;
+            color: #0f172a;
         }
         .math-inline {
             font-family: "Times New Roman", Times, serif;
             font-style: italic;
             font-weight: bold;
+        }
+
+        .caption-number {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            margin-top: 5px;
         }
 
         /* المان‌های پاپ‌آپ داخل محیط سه بعدی */
@@ -469,11 +537,10 @@
             left: 50%;
             transform: translateX(-50%) translateY(-10px);
             z-index: 10;
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid #ef4444;
-            color: #ef4444;
+            background: #0f172a;
+            color: #ffffff;
             padding: 0.6rem 2.2rem;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: bold;
             border-radius: 30px;
             opacity: 0; 
@@ -486,28 +553,117 @@
             position: absolute;
             z-index: 8;
             background: rgba(255, 255, 255, 0.95);
-            border: 1.5px solid #ef4444;
-            color: #ef4444;
+            border: 1px solid #a78bfa;
+            color: #6366f1;
             padding: 2px 6px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 0.85rem;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 6px;
             transform: translate(-50%, -50%);
             opacity: 0.9;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
+        /* ==========================================================================
+           کدهای اختصاصی رسپانسیو و بهینه‌سازی کامل نسخه موبایل (تضمین خوانایی و تمیزی)
+           ========================================================================== */
         @media (max-width: 1023px) {
-            .middle-content-row { flex-direction: column; }
-            .grid-images { flex-direction: column; align-items: center; }
-            .grid-images img { width: 90%; height: auto; }
-            .bottom-layout-container { flex-direction: column; }
-            .left-visual-column { flex: 0 0 100%; }
-            .sidebar-text-zone { flex: 0 0 100%; }
-            .newtonian-grid-layout { grid-template-columns: 1fr; }
-            .euclidean-foundations-box { max-height: none; overflow-y: visible; }
-            .foundations-grid { grid-template-columns: repeat(2, 1fr); }
-            .main-content-zone { height: 50vh; }
+            body {
+                background-size: 100% 100%, 100% 100%, 20px 20px;
+            }
+            body::before {
+                display: none; /* حذف دودل‌های بزرگ پس‌زمینه در موبایل جهت خلوت ماندن فضا */
+            }
+            .hero-intro-zone {
+                padding: 1.5rem 1rem 1rem 1rem;
+            }
+            .hero-box {
+                padding: 1.5rem 1rem;
+                border-radius: 16px;
+            }
+            .hero-box h1 {
+                font-size: 1.35rem;
+                line-height: 1.3;
+            }
+            .middle-content-row {
+                flex-direction: column;
+                padding: 0 1rem 1rem 1rem;
+                gap: 15px;
+            }
+            .image-gallery-box {
+                flex: 0 0 100%;
+                padding: 1.2rem;
+            }
+            .grid-images {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                width: 100%;
+            }
+            .grid-images img {
+                width: 100%;
+                max-width: 280px;
+                height: 240px;
+            }
+            .bottom-layout-container {
+                flex-direction: column;
+                padding: 0 1rem 1rem 1rem;
+                gap: 15px;
+            }
+            .left-visual-column {
+                flex: 0 0 100%;
+                gap: 15px;
+            }
+            .infobox {
+                padding: 1.5rem 1.2rem;
+                border-radius: 16px;
+            }
+            /* تبدیل گرید دو ستونه متون نیوتنی به حالت تک ستونه منظم در موبایل */
+            .newtonian-grid-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .main-content-zone {
+                height: 45vh;
+                border-radius: 16px;
+            }
+            .metrics-cosmology-box, .references-box {
+                padding: 1.5rem 1.2rem;
+                border-radius: 16px;
+            }
+            /* بهینه‌سازی فرمول‌های بزرگ ریاضی کاتژ در اسکرین موبایل برای جلوگیری از بیرون‌زدگی */
+            .math-display {
+                font-size: 0.95rem;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 0.6rem;
+            }
+            .sidebar-text-zone {
+                flex: 0 0 100%;
+                gap: 15px;
+            }
+            /* غیرفعال کردن اسکرول داخلی باکس تصاویر اقلیدسی در موبایل و تبدیل چیدمان به گالری دو ستونه موازی منظم */
+            .euclidean-foundations-box {
+                max-height: none;
+                overflow-y: visible;
+                padding: 1.2rem;
+                border-radius: 16px;
+            }
+            .foundations-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .foundations-grid img {
+                aspect-ratio: 1 / 1;
+            }
+            .transition-spacetime-box {
+                padding: 1.5rem 1.2rem;
+                border-radius: 16px;
+            }
+            .embedded-box-image {
+                max-height: 180px;
+            }
         }
     </style>
     <script>
@@ -724,8 +880,8 @@
         const l2 = new THREE.DirectionalLight(0xc084fc, 0.35); l2.position.set(-10, -5, -5); scene.add(l2);
 
         const clickableObjects = [], modelGroups = [], trackedPoints = [];
-        const redLineMat = new THREE.LineBasicMaterial({ color: 0xef4444, linewidth: 4 });
-        const purpleMeshMat = new THREE.MeshStandardMaterial({ color: 0xa78bfa, side: THREE.DoubleSide, roughness: 0.4, metalness: 0.15 });
+        const redLineMat = new THREE.LineBasicMaterial({ color: 0x6366f1, linewidth: 4 });
+        const purpleMeshMat = new THREE.MeshStandardMaterial({ color: 0xc084fc, side: THREE.DoubleSide, roughness: 0.4, metalness: 0.15 });
         const gridMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.08 });
 
         const flatGroup = new THREE.Group(), sphGroup = new THREE.Group(), hypGroup = new THREE.Group();
@@ -788,9 +944,9 @@
             const h = container.clientHeight;
             camera.aspect = w / h; camera.updateProjectionMatrix(); renderer.setSize(w, h);
             let isMob = window.innerWidth<1024;
-            flatGroup.position.set(isMob?-1.4:-2.8, 0, 0); sphGroup.position.set(0,0,0); hypGroup.position.set(isMob?1.4:2.8, 0, 0);
-            camera.position.set(0, isMob?0.3:1.5, isMob?6.2:9.0); camera.lookAt(0,0,0);
-            modelGroups.forEach(m => m.ts = isMob?0.52:1.0);
+            flatGroup.position.set(isMob?-1.2:-2.8, 0, 0); sphGroup.position.set(0,0,0); hypGroup.position.set(isMob?1.2:2.8, 0, 0);
+            camera.position.set(0, isMob?0.4:1.5, isMob?5.5:9.0); camera.lookAt(0,0,0);
+            modelGroups.forEach(m => m.ts = isMob?0.48:1.0);
         }
         arrange(); window.addEventListener('resize', arrange);
 
@@ -805,8 +961,8 @@
             if(hits.length>0){
                 activeG = hits[0].object.userData.parentGroup; isDrag = true; prevM = {x, y};
                 titleEl.innerText = hits[0].object.userData.title; titleEl.classList.add('visible');
-                modelGroups.forEach(m => { m.isExpanded = (m.g===activeG); m.ts = m.isExpanded?(window.innerWidth<1024?0.75:1.35):(window.innerWidth<1024?0.52:1.0); });
-            } else { titleEl.classList.remove('visible'); modelGroups.forEach(m => { m.isExpanded=false; m.ts=(window.innerWidth<1024?0.52:1.0); }); }
+                modelGroups.forEach(m => { m.isExpanded = (m.g===activeG); m.ts = m.isExpanded?(window.innerWidth<1024?0.7:1.35):(window.innerWidth<1024?0.48:1.0); });
+            } else { titleEl.classList.remove('visible'); modelGroups.forEach(m => { m.isExpanded=false; m.ts=(window.innerWidth<1024?0.48:1.0); }); }
         }
         function move(x, y){ if(!isDrag || !activeG) return; activeG.rotation.y += (x-prevM.x)*0.009; activeG.rotation.x += (y-prevM.y)*0.009; prevM = {x, y}; }
 
