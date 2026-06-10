@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EVOLUTION OF GRAVITY AND NON-EUCLIDEAN SPACETIME GEOMETRY</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        /* ۱. باکس هیرو (بالاترین باکس) */
+        .hero-intro-zone {
+            width: 100%;
+            padding: 3rem 2rem 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            background: #ffffff;
+        }
+        .hero-box {
+            width: 100%;
+            max-width: 1100px;
+            background: #f8fafc;
+            border: 2px solid #ef4444;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        .hero-box h1 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        /* ۲. باکس جدید تصاویر (سمت راست - زیر هیرو) */
+        .gallery-outer-zone {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem 1.5rem 2rem;
+            display: flex;
+            justify-content: flex-end; /* راندن باکس به سمت راست */
+        }
+        .image-gallery-box {
+            width: 45%; /* پهنای باکس تصاویر */
+            background: #f8fafc;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .image-gallery-box h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+            border-right: 3px solid #ef4444;
+            padding-right: 10px;
+        }
+        /* ساختار شبکه‌ای برای عکس‌ها - قابلیت اضافه کردن عکس در آینده */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        .grid-container img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .grid-container img:hover {
+            transform: scale(1.05);
+        }
+
+        /* ۳. بخش محتوای اصلی (مدل‌ها و سایدبار) */
+        .main-content-zone {
+            display: flex;
+            width: 100vw;
+            height: 70vh;
+        }
+
+        .canvas-zone {
+            position: relative;
+            flex: 0 0 65%;
+            height: 100%;
+        }
+        #canvas-inner { width: 100%; height: 100%; }
+
+        .sidebar-text-zone {
+            flex: 0 0 35%;
+            height: 100%;
+            overflow-y: auto;
+            background: #f8fafc;
+            border-left: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        #model-title {
+            position: absolute;
+            top: 4%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 0.6rem 2.2rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 30px;
+            opacity: 0; 
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+        }
+        #model-title.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* برچسب زوایا (انگلیسی) */
+        .angle-label {
+            position: absolute;
+            z-index: 8;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1.5px solid #ef4444;
+            color: #ef4444;
+            padding: 2px 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 5px;
+            transform: translate(-50%, -50%);
+            opacity: 0.9;
+        }
+        
+        .infobox {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+        h1 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+            padding-bottom: 8px;
+        }
+        p { font-size: 1rem; line-height: 1.7; text-align: justify; }
+        .highlight { color: #ef4444; font-weight: bold; }
+
+        /* موبایل */
+        @media (max-width: 1023px) {
+            .hero-box h1 { font-size: 1.3rem; }
+            .image-gallery-box { width: 100%; }
+            .main-content-zone { flex-direction: column; height: auto; }
+            .canvas-zone { height: 45vh; position: sticky; top: 0; z-index: 5; background: white; border-bottom: 1px solid #ddd; }
+            .sidebar-text-zone { width: 100vw; height: auto; padding: 1.5rem 1rem; }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <div class="hero-intro-zone">
+            <div class="hero-box">
+                <h1>EVOLUTION OF GRAVITY AND NON-EUCLIDEAN SPACETIME GEOMETRY</h1>
+                <p>scroll down to read the full infograph. You can click on each model for extra explanation and hold each to rotate the 3D models for better understanding of the topic.</p>
+            </div>
+        </div>
+
+        <div class="gallery-outer-zone">
+            <div class="image-gallery-box">
+                <h3>Visual References</h3>
+                <div class="grid-container">
+                    <img src="images/pic1.jpg" alt="Reference 1">
+                    <img src="images/pic2.jpg" alt="Reference 2">
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content-zone">
+            <div class="canvas-zone">
+                <div id="model-title">مدل</div>
+                <div id="canvas-inner"></div>
+                <div id="labels-container" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:8;"></div>
+            </div>
+
+            <div class="sidebar-text-zone">
+                <section class="infobox">
+                    <h1>هندسه نااقلیدسی و انحنای فضا-زمان</h1>
+                    <p>در نسبیت عام، فضا-زمان یک ساختار انعطاف‌پذیر است. جرم‌ها ساختار فضا را خمیده می‌کنند. برای درک این انحنا، ما معیارهای فضا را به سه هندسه کلی تقسیم می‌کنیم: <span class="highlight">مسطح (k=0)</span>، <span class="highlight">کروی (k=1)</span>، و <span class="highlight">هذلولی (k=-1)</span>.</p>
+                </section>
+                <section class="infobox">
+                    <h1>مقایسه زوایای مثلث‌ها</h1>
+                    <p>در فضای تخت مجموع زوایا <span class="highlight">۱۸۰ درجه</span>، در فضای کروی <span class="highlight">بیشتر از ۱۸۰ درجه</span> و در فضای هذلولی مجموع زوایا <span class="highlight">کمتر از ۱۸۰ درجه</span> است.</p>
+                </section>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const zone = document.getElementById('canvas-inner');
+        const labelsContainer = document.getElementById('labels-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, zone.clientWidth / zone.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(zone.clientWidth, zone.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        zone.appendChild(renderer.domElement);
+
+        scene.add(new THREE.AmbientLight(0xffffff, 0.85));
+        const l1 = new THREE.DirectionalLight(0xffffff, 1.0); l1.position.set(5, 15, 10); scene.add(l1);
+        const l2 = new THREE.DirectionalLight(0xc084fc, 0.35); l2.position.set(-10, -5, -5); scene.add(l2);
+
+        const clickableObjects = [], modelGroups = [], trackedPoints = [];
+        const redLineMat = new THREE.LineBasicMaterial({ color: 0xef4444, linewidth: 4 });
+        const purpleMeshMat = new THREE.MeshStandardMaterial({ color: 0xa78bfa, side: THREE.DoubleSide, roughness: 0.4, metalness: 0.15 });
+        const gridMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.08 });
+
+        const flatGroup = new THREE.Group(), sphGroup = new THREE.Group(), hypGroup = new THREE.Group();
+        scene.add(flatGroup); scene.add(sphGroup); scene.add(hypGroup);
+
+        function createAngleLabel(text) {
+            const div = document.createElement('div'); div.className = 'angle-label'; div.innerText = text;
+            labelsContainer.appendChild(div); return div;
+        }
+
+        // مدل تخت
+        flatGroup.rotation.x = Math.PI / 6;
+        const flatMesh = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 2.4), purpleMeshMat);
+        flatMesh.rotation.x = -Math.PI / 2; flatMesh.userData = { title: 'Euclidean Space', parentGroup: flatGroup };
+        flatGroup.add(flatMesh); clickableObjects.push(flatMesh);
+        flatGroup.add(new THREE.Mesh(new THREE.PlaneGeometry(2.4, 2.4), gridMat).clone().rotateX(-Math.PI/2));
+        const fp = [new THREE.Vector3(0,0.01,-0.6), new THREE.Vector3(-0.6,0.01,0.6), new THREE.Vector3(0.6,0.01,0.6)];
+        flatGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([...fp, fp[0]]), redLineMat));
+        trackedPoints.push({o:flatGroup, lp:fp[0], el:createAngleLabel('50.2°')}, {o:flatGroup, lp:fp[1], el:createAngleLabel('66.4°')}, {o:flatGroup, lp:fp[2], el:createAngleLabel('63.4°')});
+        modelGroups.push({g:flatGroup, isExpanded: false});
+
+        // مدل کروی (اصلاح موقعیت مثلث و پچ تیره)
+        const radius = 1.1;
+        const sphMesh = new THREE.Mesh(new THREE.SphereGeometry(radius, 32, 32), purpleMeshMat);
+        sphMesh.userData = { title: 'Spherical Space', parentGroup: sphGroup };
+        sphGroup.add(sphMesh); clickableObjects.push(sphMesh);
+        sphGroup.add(new THREE.Mesh(new THREE.SphereGeometry(radius, 32, 32), gridMat));
+        // پچ تیره در سمت مخالف
+        const patch = new THREE.Mesh(new THREE.SphereGeometry(radius+0.003, 32,32, Math.PI, Math.PI/2, 0, Math.PI/2), new THREE.MeshStandardMaterial({color: 0x8b5cf6}));
+        patch.rotation.x = -Math.PI/2; sphGroup.add(patch);
+        const sp = []; 
+        for(let i=0; i<=20; i++){ let t=Math.PI+(Math.PI/2)*(i/20); sp.push(new THREE.Vector3(radius*Math.cos(t),0,radius*Math.sin(t))); }
+        for(let i=0; i<=20; i++){ let p=(Math.PI/2)*(i/20); sp.push(new THREE.Vector3(-radius*Math.cos(p),radius*Math.sin(p),0)); }
+        for(let i=0; i<=20; i++){ let p=(Math.PI/2)*(1-i/20); sp.push(new THREE.Vector3(0,radius*Math.sin(p),-radius*Math.cos(p))); }
+        sphGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(sp), redLineMat));
+        trackedPoints.push({o:sphGroup, lp:new THREE.Vector3(-radius,0,0), el:createAngleLabel('90.0°')}, {o:sphGroup, lp:new THREE.Vector3(0,0,-radius), el:createAngleLabel('90.0°')}, {o:sphGroup, lp:new THREE.Vector3(0,radius,0), el:createAngleLabel('90.0°')});
+        modelGroups.push({g:sphGroup, isExpanded: false});
+
+        // مدل هذلولی (اصلاح تقعر ملایم)
+        const saddleGeo = new THREE.BufferGeometry(); const v=[], seg=24, sz=2.2;
+        for(let i=0;i<=seg;i++) for(let j=0;j<=seg;j++){ let x=(i/seg-0.5)*sz, z=(j/seg-0.5)*sz; v.push(x,(x*x-z*z)*0.45,z); }
+        const idx=[]; for(let i=0;i<seg;i++) for(let j=0;j<seg;j++){ let a=i*(seg+1)+j, b=a+1, c=(i+1)*(seg+1)+j, d=c+1; idx.push(a,b,c,b,d,c); }
+        saddleGeo.setAttribute('position', new THREE.Float32BufferAttribute(v,3)); saddleGeo.setIndex(idx); saddleGeo.computeVertexNormals();
+        const hypMesh = new THREE.Mesh(saddleGeo, purpleMeshMat); hypMesh.userData={title:'Hyperbolic Space', parentGroup:hypGroup};
+        hypGroup.add(hypMesh); clickableObjects.push(hypMesh); hypGroup.add(new THREE.Mesh(saddleGeo, gridMat));
+        const hp = [new THREE.Vector3(0,0,-0.65), new THREE.Vector3(-0.6,0,0.45), new THREE.Vector3(0.6,0,0.45)];
+        const sampleSaddle = (vA, vB, t) => {
+            let x=vA.x+(vB.x-vA.x)*t, z=vA.z+(vB.z-vA.z)*t;
+            let p=0.14*Math.sin(t*Math.PI); x+=( (hp[0].x+hp[1].x+hp[2].x)/3 - x)*p; z+=( (hp[0].z+hp[1].z+hp[2].z)/3 - z)*p;
+            return new THREE.Vector3(x, (x*x-z*z)*0.45+0.018, z);
+        };
+        const hpLine=[]; for(let i=0;i<=20;i++) hpLine.push(sampleSaddle(hp[0],hp[1],i/20)); for(let i=0;i<=20;i++) hpLine.push(sampleSaddle(hp[1],hp[2],i/20)); for(let i=0;i<=20;i++) hpLine.push(sampleSaddle(hp[2],hp[0],i/20));
+        hypGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(hpLine), redLineMat));
+        trackedPoints.push({o:hypGroup, lp:new THREE.Vector3(hp[0].x, (hp[0].x**2-hp[0].z**2)*0.45+0.03, hp[0].z), el:createAngleLabel('29.4°')}, {o:hypGroup, lp:new THREE.Vector3(hp[1].x, (hp[1].x**2-hp[1].z**2)*0.45+0.03, hp[1].z), el:createAngleLabel('30.7°')}, {o:hypGroup, lp:new THREE.Vector3(hp[2].x, (hp[2].x**2-hp[2].z**2)*0.45+0.03, hp[2].z), el:createAngleLabel('30.7°')});
+        modelGroups.push({g:hypGroup, isExpanded: false});
+
+        function arrange(){
+            camera.aspect = zone.clientWidth/zone.clientHeight; camera.updateProjectionMatrix(); renderer.setSize(zone.clientWidth, zone.clientHeight);
+            let isMob = window.innerWidth<1024;
+            flatGroup.position.set(isMob?-1.8:-3.6,0,0); sphGroup.position.set(0,0,0); hypGroup.position.set(isMob?1.8:3.6,0,0);
+            camera.position.set(0, isMob?0.3:1.8, isMob?6.2:10); camera.lookAt(0,0,0);
+            modelGroups.forEach(m => m.ts = isMob?0.52:1.0);
+        }
+        arrange(); window.addEventListener('resize', arrange);
+
+        const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(), titleEl = document.getElementById('model-title');
+        let activeG = null, isDrag = false, prevM = {x:0, y:0};
+
+        function down(x, y){
+            const r = renderer.domElement.getBoundingClientRect();
+            if(x<r.left || x>r.right || y<r.top || y>r.bottom) return;
+            mouse.x = ((x-r.left)/r.width)*2-1; mouse.y = -((y-r.top)/r.height)*2+1;
+            ray.setFromCamera(mouse, camera); const hits = ray.intersectObjects(clickableObjects);
+            if(hits.length>0){
+                activeG = hits[0].object.userData.parentGroup; isDrag = true; prevM = {x, y};
+                titleEl.innerText = hits[0].object.userData.title; titleEl.classList.add('visible');
+                modelGroups.forEach(m => { m.isExpanded = (m.g===activeG); m.ts = m.isExpanded?(window.innerWidth<1024?0.75:1.35):(window.innerWidth<1024?0.52:1.0); });
+            } else { titleEl.classList.remove('visible'); modelGroups.forEach(m => { m.isExpanded=false; m.ts=(window.innerWidth<1024?0.52:1.0); }); }
+        }
+        function move(x, y){ if(!isDrag || !activeG) return; activeG.rotation.y += (x-prevM.x)*0.009; activeG.rotation.x += (y-prevM.y)*0.009; prevM = {x, y}; }
+
+        window.addEventListener('mousedown', e => down(e.clientX, e.clientY));
+        window.addEventListener('mousemove', e => move(e.clientX, e.clientY));
+        window.addEventListener('mouseup', () => {isDrag=false; activeG=null;});
+        window.addEventListener('touchstart', e => { if(e.touches.length>0) down(e.touches[0].clientX, e.touches[0].clientY); });
+        window.addEventListener('touchmove', e => { if(e.touches.length>0){ if(isDrag) e.preventDefault(); move(e.touches[0].clientX, e.touches[0].clientY); } }, {passive:false});
+        window.addEventListener('touchend', () => {isDrag=false; activeG=null;});
+
+        const v3 = new THREE.Vector3();
+        function animate(){
+            requestAnimationFrame(animate);
+            modelGroups.forEach(m => { let s=m.g.scale.x; s+=(m.ts-s)*0.12; m.g.scale.set(s,s,s); });
+            renderer.render(scene, camera);
+            trackedPoints.forEach(pt => {
+                v3.copy(pt.lp); pt.o.localToWorld(v3); v3.project(camera);
+                if(v3.z>1) { pt.el.style.opacity=0; return; }
+                const x = (v3.x*0.5+0.5)*zone.clientWidth, y = (-v3.y*0.5+0.5)*zone.clientHeight;
+                pt.el.style.left = x+'px'; pt.el.style.top = y+'px';
+                pt.el.style.opacity = (x<0 || x>zone.clientWidth || y<0 || y>zone.clientHeight)?0:0.95;
+            });
+        }
+        animate();
+    </script>
+</body>
+</html>
