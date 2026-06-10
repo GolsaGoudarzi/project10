@@ -132,7 +132,7 @@
             transform: scale(1.03);
         }
 
-        /* کانتینر اصلی بخش پایینی */
+        /* کانتینر اصلی بخش پایینی - سیستم دو ستونه موازی */
         .bottom-layout-container {
             width: 100%;
             max-width: 1200px;
@@ -140,10 +140,10 @@
             padding: 0 2rem 2rem 2rem;
             display: flex;
             gap: 25px;
-            align-items: stretch;
+            align-items: stretch; /* تراز ساختاری مطلق انتهای دو ستون با هم */
         }
 
-        /* ستون سمت چپ: کانتینر مدیا، بوم سه بعدی و باکس متریک جدید */
+        /* ستون سمت چپ: مدیا، شبیه‌ساز سه بعدی و باکس Part III */
         .left-visual-column {
             flex: 0 0 75%;
             display: flex;
@@ -226,7 +226,7 @@
         }
         #canvas-inner { width: 100%; height: 100%; }
 
-        /* باکس اطلاعاتی جدید: Part III (متریک‌ها و کیهان‌شناسی) */
+        /* باکس اطلاعاتی Part III (متریک‌ها و کیهان‌شناسی) */
         .metrics-cosmology-box {
             width: 100%;
             background: #f8fafc;
@@ -261,24 +261,34 @@
             font-weight: 600;
         }
 
-        /* ستون سمت راست: سایدبار متنی نیوتنی */
+        /* ستون سمت راست: سایدبار متنی حاوی باکس‌های Part II و Part IV روی هم */
         .sidebar-text-zone {
             flex: 0 0 25%; 
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* فاصله بین باکس دوم و چهارم */
             direction: ltr;
             text-align: left;
         }
 
-        /* باکس نیوتنی - همواره کشیده و فیت شده تا لبه پایینی کامپوننت جدید پایینی */
-        .infobox {
+        /* ساختار باکس‌های متنی سمت راست */
+        .infobox, .transition-spacetime-box {
             background: #f8fafc;
             border: 1px solid rgba(0, 0, 0, 0.1);
             padding: 1.8rem;
             border-radius: 14px;
-            height: 100%; 
-            overflow-y: auto; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-        .infobox h2 {
+        
+        /* برای اینکه کل دو باکس با هم ستون چپ را پر کنند، به سایدبار اجازه رشد متوازن می‌دهیم */
+        .infobox {
+            flex: 1 1 auto;
+        }
+        .transition-spacetime-box {
+            flex: 1 1 auto;
+        }
+
+        .infobox h2, .transition-spacetime-box h2 {
             font-size: 1.2rem;
             margin-bottom: 1.4rem;
             color: #1e293b;
@@ -286,21 +296,23 @@
             padding-left: 10px;
             font-weight: 700;
         }
-        .newtonian-list {
+
+        .newtonian-list, .transition-list {
             list-style-type: none;
             display: flex;
             flex-direction: column;
             gap: 1.4rem;
         }
-        .newtonian-list li {
+        .newtonian-list li, .transition-list li {
             font-size: 0.95rem;
             line-height: 1.6;
             color: #334155;
         }
-        .newtonian-list strong {
+        .newtonian-list strong, .transition-list strong {
             color: #ef4444;
             font-weight: 600;
         }
+        
         .sub-list {
             list-style-type: none;
             padding-left: 1.2rem;
@@ -313,6 +325,7 @@
             font-size: 0.9rem;
             color: #475569;
         }
+
         .math-display {
             display: block;
             font-family: "Times New Roman", Times, serif;
@@ -375,7 +388,6 @@
             .bottom-layout-container { flex-direction: column; }
             .left-visual-column { flex: 0 0 100%; }
             .sidebar-text-zone { flex: 0 0 100%; }
-            .infobox { height: auto; }
             .foundations-grid { grid-template-columns: repeat(2, 1fr); }
             .main-content-zone { height: 50vh; }
         }
@@ -485,6 +497,7 @@
             </div>
 
             <div class="sidebar-text-zone">
+                
                 <section class="infobox">
                     <h2>Part II: Newtonian Mechanics and Euclidean Foundations</h2>
                     <ul class="newtonian-list">
@@ -519,6 +532,37 @@
                         </li>
                     </ul>
                 </section>
+
+                <section class="transition-spacetime-box">
+                    <h2>Part IV: The Transition to Non-Euclidean Spacetime</h2>
+                    <ul class="transition-list">
+                        <li>
+                            <strong>The Foundations of Modern Geometry:</strong> Mathematicians such as Gauss, Riemann, and Lobachevsky developed non-Euclidean systems. They redefined a "straight line" as a geodesic—the shortest path between two points on any given surface. Einstein utilized these non-Euclidean principles to construct the theories of Special and General Relativity.
+                        </li>
+                        <li>
+                            <strong>Special Relativity and 4D Spacetime:</strong> Special Relativity transformed our understanding of time. Instead of being a mere parameter of evolution ($t$), time became the fourth dimension of a unified 4D spacetime manifold ($x^0 = ct$).
+                        </li>
+                        <li>
+                            <strong>Comparing Newton’s Second Law to the Geodesic Equation:</strong>
+                            <ul class="sub-list">
+                                <li>
+                                    • Newtonian Mechanics:
+                                    <div class="math-display">$$F = m \frac{d^2x}{dt^2}$$</div>
+                                    <br>
+                                </li>
+                                <li>
+                                    • General Relativity (The Geodesic Equation):
+                                    <div class="math-display">$$\frac{d^2x^\lambda}{d\tau^2} + \Gamma^\lambda_{\mu\nu} \frac{dx^\mu}{d\tau} \frac{dx^\nu}{d\tau} = 0$$</div>
+                                    <br>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Gravity as Geometry, Not Force:</strong> In this equation, $\tau$ (tau) is the proper time or evolution parameter. When comparing this to the case where Newtonian force ($F$) is zero, the term involving $\Gamma$ (The Connection/Christoffel Symbols) represents the gravitational effect. This demonstrates that in General Relativity, gravity is not a force but a manifestation of the geometric properties of curved spacetime.
+                        </li>
+                    </ul>
+                </section>
+
             </div>
 
         </div>
