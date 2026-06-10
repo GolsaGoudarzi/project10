@@ -132,18 +132,26 @@
             transform: scale(1.03);
         }
 
-        /* بخش کانتینر پایینی که حاوی گالری‌های جدید و بخش ۳بعدی است */
+        /* کانتینر اصلی بخش پایینی - پیاده‌سازی دو ستونه برای جلوگیری از اورلپ */
         .bottom-layout-container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem 2rem 2rem;
             display: flex;
-            flex-direction: column;
-            gap: 20px; /* فاصله استاندارد بین گالری‌های جدید */
+            gap: 25px;
+            align-items: stretch; /* کشیده شدن ستون‌ها تا ارتفاع همسان */
         }
 
-        /* باکس گالری ۵ عکسی جدید */
+        /* ستون سمت چپ: تمام باکس‌های مدیا و شبیه‌ساز سه بعدی */
+        .left-visual-column {
+            flex: 0 0 65%; /* اختصاص ۶۵ درصد از عرض کل */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* باکس گالری ۵ عکسی */
         .euclidean-foundations-box {
             width: 100%;
             background: #f8fafc;
@@ -163,8 +171,8 @@
         }
         .foundations-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* ردیف منظم ۵ تایی */
-            gap: 15px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
         }
         .foundations-grid img {
             width: 100%;
@@ -179,7 +187,7 @@
             transform: scale(1.04);
         }
 
-        /* باکس تک عکسی بدون عنوان (زیر باکس ۵ عکسی) */
+        /* باکس تک عکسی بدون عنوان (pic8) */
         .single-photo-box {
             width: 100%;
             background: #f8fafc;
@@ -194,45 +202,102 @@
         .single-photo-box img {
             max-width: 100%;
             height: auto;
-            max-height: 400px; /* کنترل ارتفاع برای زیبایی بیشتر */
+            max-height: 350px;
             object-fit: contain;
             border-radius: 8px;
             border: 1px solid rgba(0,0,0,0.06);
         }
 
-        /* ۳. بخش اصلی پایینی (مدل‌های سه بعدی و سایدبار نیوتنی) */
+        /* کانتینر رندر شبیه‌ساز سه بعدی */
         .main-content-zone {
-            display: flex;
             width: 100%;
-            height: 75vh;
+            height: 65vh;
             background: #ffffff;
             border: 1px solid rgba(0,0,0,0.08);
             border-radius: 14px;
             overflow: hidden;
+            position: relative;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-
         .canvas-zone {
-            position: relative;
-            flex: 0 0 65%;
+            width: 100%;
             height: 100%;
+            position: relative;
         }
         #canvas-inner { width: 100%; height: 100%; }
 
+        /* ستون سمت راست: سایدبار متنی با متد استیکی و کشیدگی کامل از بالا تا پایین موازات ستون چپ */
         .sidebar-text-zone {
-            flex: 0 0 35%;
-            height: 100%;
-            overflow-y: auto;
-            background: #f8fafc;
-            border-left: 1px solid rgba(0, 0, 0, 0.08);
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            flex: 0 0 35%; /* اختصاص ۳۵ درصد از عرض کل */
             direction: ltr;
             text-align: left;
         }
 
+        /* استایل اختصاصی باکس متنی نیوتنی که کل ارتفاع کانتینر را پوشش می‌دهد */
+        .infobox {
+            background: #f8fafc;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border-radius: 14px;
+            height: 100%; /* کشیدگی کامل از ابتدا تا انتهای کانتینر پایینی */
+            overflow-y: auto; /* فعال کردن اسکرول داخلی در صورت ازدیاد متن */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .infobox h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+            border-left: 4px solid #ef4444;
+            padding-left: 12px;
+            font-weight: 700;
+        }
+        .newtonian-list {
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+        .newtonian-list li {
+            font-size: 0.98rem;
+            line-height: 1.6;
+            color: #334155;
+        }
+        .newtonian-list strong {
+            color: #ef4444;
+            font-weight: 600;
+        }
+        .sub-list {
+            list-style-type: none;
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .sub-list li {
+            font-size: 0.92rem;
+            color: #475569;
+        }
+        .math-display {
+            display: block;
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            background: #ffffff;
+            padding: 0.6rem;
+            margin: 0.5rem 0;
+            border-radius: 6px;
+            border-left: 2px solid #cbd5e1;
+            text-align: center;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .math-inline {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        /* المان‌های پاپ‌آپ داخل محیط سه بعدی */
         #model-title {
             position: absolute;
             top: 4%;
@@ -266,74 +331,17 @@
             transform: translate(-50%, -50%);
             opacity: 0.9;
         }
-        
-        .infobox {
-            background: rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            padding: 1.5rem;
-            border-radius: 12px;
-        }
-        .infobox h2 {
-            font-size: 1.2rem;
-            margin-bottom: 1.2rem;
-            color: #1e293b;
-            border-left: 4px solid #ef4444;
-            padding-left: 10px;
-            font-weight: 700;
-        }
-        .newtonian-list {
-            list-style-type: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-        .newtonian-list li {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: #334155;
-        }
-        .newtonian-list strong {
-            color: #ef4444;
-            font-weight: 600;
-        }
-        .sub-list {
-            list-style-type: none;
-            padding-left: 1.2rem;
-            margin-top: 0.4rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-        .sub-list li {
-            font-size: 0.9rem;
-            color: #475569;
-        }
-        .math-display {
-            display: block;
-            font-family: "Times New Roman", Times, serif;
-            font-style: italic;
-            font-size: 1.15rem;
-            background: #ffffff;
-            padding: 0.5rem;
-            margin: 0.4rem 0;
-            border-radius: 6px;
-            border-left: 2px solid #cbd5e1;
-            text-align: center;
-        }
-        .math-inline {
-            font-family: "Times New Roman", Times, serif;
-            font-style: italic;
-            font-weight: bold;
-        }
 
         @media (max-width: 1023px) {
             .middle-content-row { flex-direction: column; }
             .grid-container { flex-direction: column; align-items: center; }
             .grid-container img { width: 90%; height: auto; }
+            .bottom-layout-container { flex-direction: column; }
+            .left-visual-column { flex: 0 0 100%; }
+            .sidebar-text-zone { flex: 0 0 100%; }
+            .infobox { height: auto; }
             .foundations-grid { grid-template-columns: repeat(2, 1fr); }
-            .main-content-zone { flex-direction: column; height: auto; }
-            .canvas-zone { height: 45vh; position: sticky; top: 0; z-index: 5; background: white; border-bottom: 1px solid #ddd; }
-            .sidebar-text-zone { width: 100vw; height: auto; padding: 1.5rem 1rem; }
+            .main-content-zone { height: 50vh; }
         }
     </style>
     <script>
@@ -378,64 +386,68 @@
 
         <div class="bottom-layout-container">
             
-            <div class="euclidean-foundations-box">
-                <h3>EUCLIDEAN FOUNDATIONS</h3>
-                <div class="foundations-grid">
-                    <img src="images/pic3.jpg" alt="Euclidean Foundation 1">
-                    <img src="images/pic4.jpg" alt="Euclidean Foundation 2">
-                    <img src="images/pic5.jpg" alt="Euclidean Foundation 3">
-                    <img src="images/pic6.jpg" alt="Euclidean Foundation 4">
-                    <img src="images/pic7.jpg" alt="Euclidean Foundation 5">
+            <div class="left-visual-column">
+                
+                <div class="euclidean-foundations-box">
+                    <h3>EUCLIDEAN FOUNDATIONS</h3>
+                    <div class="foundations-grid">
+                        <img src="images/pic3.jpg" alt="Euclidean Foundation 1">
+                        <img src="images/pic4.jpg" alt="Euclidean Foundation 2">
+                        <img src="images/pic5.jpg" alt="Euclidean Foundation 3">
+                        <img src="images/pic6.jpg" alt="Euclidean Foundation 4">
+                        <img src="images/pic7.jpg" alt="Euclidean Foundation 5">
+                    </div>
                 </div>
+
+                <div class="single-photo-box">
+                    <img src="images/pic8.jpg" alt="Cosmological Graphic Reference">
+                </div>
+
+                <div class="main-content-zone">
+                    <div class="canvas-zone">
+                        <div id="model-title">مدل</div>
+                        <div id="canvas-inner"></div>
+                        <div id="labels-container" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:8;"></div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="single-photo-box">
-                <img src="images/pic8.jpg" alt="Cosmological Graphic Reference">
-            </div>
-
-            <div class="main-content-zone">
-                <div class="canvas-zone">
-                    <div id="model-title">مدل</div>
-                    <div id="canvas-inner"></div>
-                    <div id="labels-container" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:8;"></div>
-                </div>
-
-                <div class="sidebar-text-zone">
-                    <section class="infobox">
-                        <h2>Part II: Newtonian Mechanics and Euclidean Foundations</h2>
-                        <ul class="newtonian-list">
-                            <li>
-                                <strong>Newton’s Universal Gravitation:</strong> Newton synthesized the work of Galileo and Kepler, defining gravity as a universal force.
-                                <div class="math-display">$$F = G \frac{m_1 m_2}{r^2}$$</div>
-                            </li>
-                            <li>
-                                <strong>Laws of Motion:</strong> Newton established three fundamental laws of motion, specifically the second law:
-                                <div class="math-display">$$F = ma$$</div>
-                            </li>
-                            <li>
-                                <strong>Euclidean Geometry and the Five Postulates:</strong> Euclidean geometry formed the mathematical bedrock of Newtonian physics. Its five postulates define a "flat" space:
-                                <ul class="sub-list">
-                                    <li>1. A straight line can be drawn between any two points.</li>
-                                    <li>2. A finite line can be extended indefinitely.</li>
-                                    <li>3. A circle can be described with any center and radius.</li>
-                                    <li>4. All right angles are equal.</li>
-                                    <li><strong>5. The Parallel Postulate:</strong> Through a point not on a given line, only one parallel line can be drawn.</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <strong>The Parallel Postulate and Curvature:</strong> Modifying the 5th postulate leads to different geometric surfaces:
-                                <ul class="sub-list">
-                                    <li>• <strong>Flat (Euclidean):</strong> Triangle angles sum to exactly <span class="math-inline">180°</span>.</li>
-                                    <li>• <strong>Spherical (Positive Curvature):</strong> Triangle angles sum to <span class="math-inline">> 180°</span>.</li>
-                                    <li>• <strong>Hyperbolic (Negative Curvature):</strong> Triangle angles sum to <span class="math-inline">< 180°</span>.</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <strong>The Problem of "Self-Evident" Definitions:</strong> Newtonian mechanics relies on the Euclidean definition of a straight line as a self-evident concept. Newton's First Law (an object remains at rest or in uniform motion in a straight line unless acted upon by a force) is fundamentally built upon this "obvious" definition, which non-Euclidean geometry eventually challenged.
-                            </li>
-                        </ul>
-                    </section>
-                </div>
+            <div class="sidebar-text-zone">
+                <section class="infobox">
+                    <h2>Part II: Newtonian Mechanics and Euclidean Foundations</h2>
+                    <ul class="newtonian-list">
+                        <li>
+                            <strong>Newton’s Universal Gravitation:</strong> Newton synthesized the work of Galileo and Kepler, defining gravity as a universal force.
+                            <div class="math-display">$$F = G \frac{m_1 m_2}{r^2}$$</div>
+                        </li>
+                        <li>
+                            <strong>Laws of Motion:</strong> Newton established three fundamental laws of motion, specifically the second law:
+                            <div class="math-display">$$F = ma$$</div>
+                        </li>
+                        <li>
+                            <strong>Euclidean Geometry and the Five Postulates:</strong> Euclidean geometry formed the mathematical bedrock of Newtonian physics. Its five postulates define a "flat" space:
+                            <ul class="sub-list">
+                                <li>1. A straight line can be drawn between any two points.</li>
+                                <li>2. A finite line can be extended indefinitely.</li>
+                                <li>3. A circle can be described with any center and radius.</li>
+                                <li>4. All right angles are equal.</li>
+                                <li><strong>5. The Parallel Postulate:</strong> Through a point not on a given line, only one parallel line can be drawn.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>The Parallel Postulate and Curvature:</strong> Modifying the 5th postulate leads to different geometric surfaces:
+                            <ul class="sub-list">
+                                <li>• <strong>Flat (Euclidean):</strong> Triangle angles sum to exactly <span class="math-inline">180°</span>.</li>
+                                <li>• <strong>Spherical (Positive Curvature):</strong> Triangle angles sum to <span class="math-inline">> 180°</span>.</li>
+                                <li>• <strong>Hyperbolic (Negative Curvature):</strong> Triangle angles sum to <span class="math-inline">< 180°</span>.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>The Problem of "Self-Evident" Definitions:</strong> Newtonian mechanics relies on the Euclidean definition of a straight line as a self-evident concept. Newton's First Law (an object remains at rest or in uniform motion in a straight line unless acted upon by a force) is fundamentally built upon this "obvious" definition, which non-Euclidean geometry eventually challenged.
+                        </li>
+                    </ul>
+                </section>
             </div>
 
         </div>
@@ -515,13 +527,14 @@
         modelGroups.push({g:hypGroup, isExpanded: false});
 
         function arrange(){
-            const parent = document.querySelector('.bottom-layout-container');
-            const w = parent.clientWidth;
-            const h = zone.clientHeight;
-            camera.aspect = (w * 0.65) / h; camera.updateProjectionMatrix(); renderer.setSize(w * 0.65, h);
+            const container = document.querySelector('.main-content-zone');
+            if (!container) return;
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+            camera.aspect = w / h; camera.updateProjectionMatrix(); renderer.setSize(w, h);
             let isMob = window.innerWidth<1024;
-            flatGroup.position.set(isMob?-1.8:-3.6,0,0); sphGroup.position.set(0,0,0); hypGroup.position.set(isMob?1.8:3.6,0,0);
-            camera.position.set(0, isMob?0.3:1.8, isMob?6.2:10); camera.lookAt(0,0,0);
+            flatGroup.position.set(isMob?-1.5:-3.0, 0, 0); sphGroup.position.set(0,0,0); hypGroup.position.set(isMob?1.5:3.0, 0, 0);
+            camera.position.set(0, isMob?0.3:1.6, isMob?6.2:9.5); camera.lookAt(0,0,0);
             modelGroups.forEach(m => m.ts = isMob?0.52:1.0);
         }
         arrange(); window.addEventListener('resize', arrange);
